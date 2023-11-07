@@ -8,12 +8,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import Loader from "@/components/ui/shared/Loader";
+import Loader from "@/components/shared/Loader";
 import useSignUpForm from "@/hooks/useSignUpForm";
 import { Link } from "react-router-dom";
 
 const SignUpForm = () => {
-  const { form, isCreatingAccount, onSubmit, isUserLoading } = useSignUpForm();
+  const { form, isCreatingAccount, onSubmit } = useSignUpForm();
 
   return (
     <Form {...form}>
@@ -112,13 +112,13 @@ const SignUpForm = () => {
           </Button>
           <p className="text-small-regular text-light-2 text-center mt-2">
             Already have an account?
+            <Link
+              to="/sign-in"
+              className="text-primary-500 text-small-semibold ml-1"
+            >
+              Log in
+            </Link>
           </p>
-          <Link
-            to="/sign-in"
-            className="text-primary-500 text-small-semibold ml-1"
-          >
-            Log in
-          </Link>
         </form>
       </div>
     </Form>
