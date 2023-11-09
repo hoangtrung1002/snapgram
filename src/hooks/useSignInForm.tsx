@@ -33,6 +33,7 @@ const useSignInForm = () => {
 
     if (!session) {
       return toast({
+        variant: "destructive",
         title: "Sign in failed. Please try again",
       });
     }
@@ -44,6 +45,7 @@ const useSignInForm = () => {
       navigate("/");
     } else {
       return toast({
+        variant: "destructive",
         title: "Sign in failed. Please try again",
       });
     }
