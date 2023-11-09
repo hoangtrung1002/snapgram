@@ -1,10 +1,21 @@
+import { Toaster } from "@/components/ui/toaster";
 import { Route, Routes } from "react-router-dom";
 import AuthLayout from "./_auth/AuthLayout";
 import { SignInForm, SignUpForm } from "./_auth/form";
 import RootLayout from "./_root/RootLayout";
 import { Home } from "./_root/pages";
-import { Toaster } from "@/components/ui/toaster";
 
+import {
+  AllUsers,
+  CreatePost,
+  EditPost,
+  Explore,
+  PageNotFound,
+  PostDetails,
+  Profile,
+  Saved,
+  UpdateProfile,
+} from "./components/shared";
 import "./globals.css";
 
 const App = () => {
@@ -19,7 +30,16 @@ const App = () => {
         {/* Private routes */}
         <Route element={<RootLayout />}>
           <Route index element={<Home />} />
+          <Route path="/explore" element={<Explore />} />
+          <Route path="/saved" element={<Saved />} />
+          <Route path="/all-user" element={<AllUsers />} />
+          <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/update-post/:id" element={<EditPost />} />
+          <Route path="/posts/:id" element={<PostDetails />} />
+          <Route path="/posts/:id/*" element={<Profile />} />
+          <Route path="/update-profile/:id" element={<UpdateProfile />} />
         </Route>
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Toaster />
     </main>
