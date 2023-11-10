@@ -1,16 +1,14 @@
 import { sidebarLinks } from "@/constants";
 import { useUserContext } from "@/context/AuthContext";
+import { useSignOutAccount } from "@/lib/react-query/QueriesAndMutaions";
 import { INavLink } from "@/types";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Button } from "../ui/button";
-import { useSignOutAccount } from "@/lib/react-query/QueriesAndMutaions";
-import { useRef } from "react";
 
 const LeftSideBar = () => {
-  const { mutate: signOut, isSuccess } = useSignOutAccount();
+  const { mutate: signOut } = useSignOutAccount();
   const { user } = useUserContext();
   const { pathname } = useLocation();
-  const divRef = useRef(null);
 
   return (
     <nav className="leftsidebar">
