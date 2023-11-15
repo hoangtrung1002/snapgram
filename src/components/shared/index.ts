@@ -10,6 +10,7 @@ import PostDetails from "./PostDetails";
 import Profile from "./Profile";
 import UpdateProfile from "./UpdateProfile";
 import PageNotFound from "./PageNotFound";
+import FileUploader from "./FileUploader";
 
 export {
   TopBar,
@@ -24,4 +25,5 @@ export {
   Profile,
   UpdateProfile,
   PageNotFound,
+  FileUploader,
 };
