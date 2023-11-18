@@ -5,9 +5,14 @@ import { Button } from "../ui/button";
 type FileUploaderProps = {
   fieldChange: (FILES: File[]) => void;
   mediaUrl: string;
+  disabled?: boolean;
 };
 
-const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
+const FileUploader = ({
+  fieldChange,
+  // mediaUrl,
+  disabled,
+}: FileUploaderProps) => {
   const [file, setFile] = useState<File[]>([]);
   const [fileUrl, setFileUrl] = useState("");
 
@@ -29,7 +34,9 @@ const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
   return (
     <div
       {...getRootProps()}
-      className="flex flex-center flex-col bg-dark-3 rounded-xl cursor-pointer"
+      className={`flex flex-center flex-col bg-dark-3 rounded-xl ${
+        disabled ? "cursor-not-allowed" : "cursor-pointer"
+      }`}
     >
       <input {...getInputProps()} className="cursor-pointer" />
       {fileUrl ? (

@@ -148,8 +148,8 @@ export const getFilePreview = (fileId: string) => {
     const fileUrl = storage.getFilePreview(
       appwriteConfig.storageId,
       fileId,
-      2000,
-      2000,
+      1440,
+      1880,
       "top",
       100
     );
@@ -178,4 +178,53 @@ export const getRecentPosts = async () => {
   if (!posts) throw new Error();
 
   return posts;
+};
+
+export const likePost = async (postId: string, likesArray: string[]) => {
+  try {
+    const updatedPost = await database.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      postId,
+      { likes: likesArray }
+    );
+
+    if (!updatedPost) throw Error();
+
+    return updatedPost;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const savePost = async (postId: string, userId: string) => {
+  try {
+    const savedPost = await database.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.savesCollectionId,
+      ID.unique(),
+      { users: userId, post: postId }
+    );
+
+    if (!savedPost) throw Error();
+
+    return savedPost;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const deleteSavedPost = async (savedRecordId: string) => {
+  try {
+    const statusCode = await database.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.savesCollectionId,
+      savedRecordId
+    );
+
+    if (!statusCode) throw Error();
+
+    return { status: "ok" };
+  } catch (error) {
+    console.log(error);
+  }
 };
