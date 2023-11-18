@@ -55,3 +55,7 @@ export type IContextType = {
   setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
   checkAuthUser: () => Promise<boolean | undefined>;
 };
+
+// export interface Post extends Models.Document, INewPost {
+//   creator: IUser;
+// }

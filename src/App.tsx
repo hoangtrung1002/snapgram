@@ -38,8 +38,8 @@ const App = () => {
           <Route path="/posts/:id" element={<PostDetails />} />
           <Route path="/posts/:id/*" element={<Profile />} />
           <Route path="/update-profile/:id" element={<UpdateProfile />} />
+          <Route path="*" element={<PageNotFound />} />
         </Route>
-        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Toaster />
     </main>
