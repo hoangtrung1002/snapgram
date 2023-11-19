@@ -7,53 +7,20 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useUserContext } from "@/context/AuthContext";
-import { useCreatePost } from "@/lib/react-query/QueriesAndMutaions";
-import { PostValidation } from "@/lib/validation";
-import { zodResolver } from "@hookform/resolvers/zod";
+import useCreatePostForm from "@/hooks/useCreatePostForm";
 import { Models } from "appwrite";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import * as z from "zod";
 import { FileUploader } from "../shared";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
-import { useToast } from "../ui/use-toast";
+import Loader from "../shared/Loader";
 
 type PostFormProps = {
   post?: Models.Document;
 };
 
 const PostForm = ({ post }: PostFormProps) => {
-  const { mutateAsync: createPost, isPending: isLoadingCreate } =
-    useCreatePost();
-  const { user } = useUserContext();
-  const { toast } = useToast();
-  const navigate = useNavigate();
-  const form = useForm<z.infer<typeof PostValidation>>({
-    resolver: zodResolver(PostValidation),
-    defaultValues: {
-      caption: post ? post?.caption : "",
-      file: [],
-      location: post ? post?.location : "",
-      tags: post ? post?.tags.join(",") : "",
-    },
-  });
+  const { onSubmit, isLoadingCreate, form } = useCreatePostForm(post);
 
-  // 2. Define a submit handler.
-  async function onSubmit(values: z.infer<typeof PostValidation>) {
-    const newPost = await createPost({
-      ...values,
-      userId: user.id,
-    });
-
-    if (!newPost) {
-      toast({
-        title: "Please try again",
-      });
-    }
-    navigate("/");
-  }
   return (
     <Form {...form}>
       <form
@@ -69,6 +36,7 @@ const PostForm = ({ post }: PostFormProps) => {
               <FormControl>
                 <Textarea
                   className="shad-textarea custom-scrollbar"
+                  disabled={isLoadingCreate}
                   {...field}
                 />
               </FormControl>
@@ -86,6 +54,7 @@ const PostForm = ({ post }: PostFormProps) => {
                 <FileUploader
                   fieldChange={field.onChange}
                   mediaUrl={post?.imageUrl}
+                  disabled={isLoadingCreate}
                 />
               </FormControl>
               <FormMessage className="shad-form_message" />
@@ -99,7 +68,12 @@ const PostForm = ({ post }: PostFormProps) => {
             <FormItem>
               <FormLabel className="shad-form_label">Add Location</FormLabel>
               <FormControl>
-                <Input type="text" className="shad-input" {...field} />
+                <Input
+                  type="text"
+                  className="shad-input"
+                  {...field}
+                  disabled={isLoadingCreate}
+                />
               </FormControl>
               <FormMessage className="shad-form_message" />
             </FormItem>
@@ -118,6 +92,7 @@ const PostForm = ({ post }: PostFormProps) => {
                   type="text"
                   className="shad-input"
                   placeholder="Travel, Books, Enjoy"
+                  disabled={isLoadingCreate}
                   {...field}
                 />
               </FormControl>
@@ -133,7 +108,13 @@ const PostForm = ({ post }: PostFormProps) => {
             type="submit"
             className="shad-button_primary whitespace-nowrap"
           >
-            Submit
+            {isLoadingCreate ? (
+              <div className="flex-center gap-2">
+                <Loader /> Loading...
+              </div>
+            ) : (
+              "Submit"
+            )}
           </Button>
         </div>
       </form>

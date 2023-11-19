@@ -2,6 +2,7 @@ import { useUserContext } from "@/context/AuthContext";
 import { multiFormatDateString } from "@/lib/utils";
 import { Models } from "appwrite";
 import { Link } from "react-router-dom";
+import PostStats from "./PostStats";
 
 type PostCardProps = {
   post: Models.Document;
@@ -21,17 +22,17 @@ const PostCard = ({ post }: PostCardProps) => {
                 post.creator.imageUrl || "/assets/icons/profile-placeholder.svg"
               }
               alt="creator"
-              className="rounded-full w-12 lg:h-12"
+              className="rounded-full w-8 lg:h-8"
             />
           </Link>
           <div className="flex flex-col">
-            <p className="base-medium lg:body-bold text-light-1">
-              {post.creator.name}
-            </p>
-            <div className="flex-center gap-2 text-light-3">
-              <p>{multiFormatDateString(post.$createdAt)}</p> -{" "}
-              <p>{post.location}</p>
+            <div className="flex gap-3 items-baseline">
+              <p className="small-semibold text-light-1">{post.creator.name}</p>
+              <div className="small-medium gap-2 text-light-3">
+                <p>{multiFormatDateString(post.$createdAt)}</p>
+              </div>
             </div>
+            <p className="small-medium gap-2 text-light-3">{post.location}</p>
           </div>
         </div>
         <Link
@@ -46,7 +47,13 @@ const PostCard = ({ post }: PostCardProps) => {
           />
         </Link>
       </div>
+
       <Link to={`/posts/${post.$id}`}>
+        <img
+          src={post.imageUrl || "/assets/icons/profile-placeholder.svg"}
+          alt="post image"
+          className="post-card_img mt-2"
+        />
         <div className="small-medium lg:base-medium py-5">
           <p>{post.caption}</p>
           <ul className="flex gap-1 mt-2">
@@ -57,12 +64,8 @@ const PostCard = ({ post }: PostCardProps) => {
             ))}
           </ul>
         </div>
-        <img
-          src={post.imageUrl || "/assets/icons/profile-placeholder.svg"}
-          alt="post image"
-          className="post-card_img"
-        />
       </Link>
+      <PostStats post={post} userId={user.id} />
     </div>
   );
 };
