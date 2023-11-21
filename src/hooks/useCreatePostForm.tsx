@@ -1,7 +1,11 @@
 import { useToast } from "@/components/ui/use-toast";
 import { useUserContext } from "@/context/AuthContext";
-import { useCreatePost } from "@/lib/react-query/QueriesAndMutaions";
+import {
+  useCreatePost,
+  useUpdatePost,
+} from "@/lib/react-query/QueriesAndMutaions";
 import { PostValidation } from "@/lib/validation";
+import { TypeAction } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Models } from "appwrite";
 import { useForm, UseFormReturn } from "react-hook-form";
@@ -11,6 +15,7 @@ import * as z from "zod";
 type Result = {
   onSubmit: (values: z.infer<typeof PostValidation>) => Promise<void>;
   isLoadingCreate: boolean;
+  isLoadingUpdate?: boolean;
   form: UseFormReturn<
     {
       caption: string;
@@ -23,7 +28,12 @@ type Result = {
   >;
 };
 
-const useCreatePostForm = (post: Models.Document | undefined): Result => {
+const useCreatePostForm = (
+  post?: Models.Document,
+  action?: TypeAction
+): Result => {
+  const { mutateAsync: updatePost, isPending: isLoadingUpdate } =
+    useUpdatePost();
   const { mutateAsync: createPost, isPending: isLoadingCreate } =
     useCreatePost();
   const { user } = useUserContext();
@@ -41,6 +51,23 @@ const useCreatePostForm = (post: Models.Document | undefined): Result => {
   });
 
   async function onSubmit(values: z.infer<typeof PostValidation>) {
+    if (post && action === TypeAction.UPDATE) {
+      const updatedPost = await updatePost({
+        ...values,
+        postId: post.$id,
+        imageId: post.imageId,
+        imageUrl: post.imageUrl,
+      });
+
+      if (!updatedPost) {
+        toast({
+          title: "Please try again",
+          variant: "destructive",
+        });
+      }
+      return navigate(`/posts/${post.$id}`);
+    }
+
     const newPost = await createPost({
       ...values,
       userId: user.id,
@@ -53,7 +80,8 @@ const useCreatePostForm = (post: Models.Document | undefined): Result => {
     }
     navigate("/");
   }
-  return { onSubmit, isLoadingCreate, form };
+
+  return { onSubmit, isLoadingCreate, form, isLoadingUpdate };
 };
 
 export default useCreatePostForm;

@@ -13,13 +13,16 @@ import { FileUploader } from "../shared";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import Loader from "../shared/Loader";
+import { TypeAction } from "@/types";
 
 type PostFormProps = {
   post?: Models.Document;
+  action: TypeAction;
 };
 
-const PostForm = ({ post }: PostFormProps) => {
-  const { onSubmit, isLoadingCreate, form } = useCreatePostForm(post);
+const PostForm = ({ post, action }: PostFormProps) => {
+  const { onSubmit, isLoadingCreate, form, isLoadingUpdate } =
+    useCreatePostForm(post, action);
 
   return (
     <Form {...form}>
@@ -36,7 +39,7 @@ const PostForm = ({ post }: PostFormProps) => {
               <FormControl>
                 <Textarea
                   className="shad-textarea custom-scrollbar"
-                  disabled={isLoadingCreate}
+                  disabled={isLoadingCreate || isLoadingUpdate}
                   {...field}
                 />
               </FormControl>
@@ -54,7 +57,7 @@ const PostForm = ({ post }: PostFormProps) => {
                 <FileUploader
                   fieldChange={field.onChange}
                   mediaUrl={post?.imageUrl}
-                  disabled={isLoadingCreate}
+                  disabled={isLoadingCreate || isLoadingUpdate}
                 />
               </FormControl>
               <FormMessage className="shad-form_message" />
@@ -72,7 +75,7 @@ const PostForm = ({ post }: PostFormProps) => {
                   type="text"
                   className="shad-input"
                   {...field}
-                  disabled={isLoadingCreate}
+                  disabled={isLoadingCreate || isLoadingUpdate}
                 />
               </FormControl>
               <FormMessage className="shad-form_message" />
@@ -92,7 +95,7 @@ const PostForm = ({ post }: PostFormProps) => {
                   type="text"
                   className="shad-input"
                   placeholder="Travel, Books, Enjoy"
-                  disabled={isLoadingCreate}
+                  disabled={isLoadingCreate || isLoadingUpdate}
                   {...field}
                 />
               </FormControl>
@@ -107,13 +110,14 @@ const PostForm = ({ post }: PostFormProps) => {
           <Button
             type="submit"
             className="shad-button_primary whitespace-nowrap"
+            disabled={isLoadingCreate || isLoadingUpdate}
           >
-            {isLoadingCreate ? (
+            {isLoadingCreate || isLoadingUpdate ? (
               <div className="flex-center gap-2">
                 <Loader /> Loading...
               </div>
             ) : (
-              "Submit"
+              <>{action} Post</>
             )}
           </Button>
         </div>

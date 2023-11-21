@@ -32,7 +32,7 @@ const usePostStats = ({ post, userId }: Props) => {
     setIsSaved(!!savedPostRecord);
   }, [currentUser]);
 
-  const handleLikePost = (
+  const handleLikePost = async (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>
   ) => {
     e.stopPropagation();
@@ -49,7 +49,6 @@ const usePostStats = ({ post, userId }: Props) => {
     likePost({ postId: post.$id, likesArray });
   };
 
-  //   !Error: Fix feature save
   const handleSavePost = (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>
   ) => {
@@ -57,7 +56,7 @@ const usePostStats = ({ post, userId }: Props) => {
 
     if (savedPostRecord) {
       setIsSaved(false);
-      deleteSavePost(savedPostRecord.$id);
+      return deleteSavePost(savedPostRecord.$id);
     }
 
     savePost({ userId: userId, postId: post.$id });
