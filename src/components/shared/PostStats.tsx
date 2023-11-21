@@ -1,7 +1,7 @@
+// import usePostStats from "@/hooks/usePostStats";
 import usePostStats from "@/hooks/usePostStats";
 import { checkIsLiked } from "@/lib/utils";
 import { Models } from "appwrite";
-
 type Props = {
   post: Models.Document;
   userId: string;
@@ -13,8 +13,8 @@ const PostStats = ({ post, userId }: Props) => {
   });
 
   return (
-    <div className="flex justify-between items-center z-20">
-      <div className="flex gap-2 mr-5">
+    <div className="flex justify-between items-center z-20 ">
+      <div className="flex gap-2 mr-5 ">
         <img
           src={
             checkIsLiked(likes, userId)

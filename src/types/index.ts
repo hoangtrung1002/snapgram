@@ -59,3 +59,8 @@ export type IContextType = {
 // export interface Post extends Models.Document, INewPost {
 //   creator: IUser;
 // }
+
+export enum TypeAction {
+  CREATE = "Create",
+  UPDATE = "Update",
+}
