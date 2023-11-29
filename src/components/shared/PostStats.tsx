@@ -1,4 +1,3 @@
-// import usePostStats from "@/hooks/usePostStats";
 import usePostStats from "@/hooks/usePostStats";
 import { checkIsLiked } from "@/lib/utils";
 import { Models } from "appwrite";

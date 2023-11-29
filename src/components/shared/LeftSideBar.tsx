@@ -1,14 +1,25 @@
-import { sidebarLinks } from "@/constants";
-import { useUserContext } from "@/context/AuthContext";
+import { INITIAL_USER, sidebarLinks } from "@/constants";
+import { useUserContext, I } from "@/context/AuthContext";
 import { useSignOutAccount } from "@/lib/react-query/QueriesAndMutaions";
 import { INavLink } from "@/types";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 
 const LeftSideBar = () => {
   const { mutate: signOut } = useSignOutAccount();
-  const { user } = useUserContext();
+  const { user, setIsAuthenticated, setUser } = useUserContext();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const handleSignOut = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    signOut();
+    setIsAuthenticated(false);
+    setUser(INITIAL_USER);
+    navigate("/sign-in");
+  };
 
   return (
     <nav className="leftsidebar">
@@ -65,7 +76,7 @@ const LeftSideBar = () => {
         <Button
           variant="ghost"
           className="shad-button_ghost rounded-lg w-full  py-7"
-          onClick={() => signOut()}
+          onClick={(e) => handleSignOut(e)}
         >
           <img
             src="/assets/icons/logout.svg"

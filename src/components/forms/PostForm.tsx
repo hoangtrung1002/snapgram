@@ -14,6 +14,7 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import Loader from "../shared/Loader";
 import { TypeAction } from "@/types";
+import { useNavigate } from "react-router-dom";
 
 type PostFormProps = {
   post?: Models.Document;
@@ -23,7 +24,7 @@ type PostFormProps = {
 const PostForm = ({ post, action }: PostFormProps) => {
   const { onSubmit, isLoadingCreate, form, isLoadingUpdate } =
     useCreatePostForm(post, action);
-
+  const navigate = useNavigate();
   return (
     <Form {...form}>
       <form
@@ -104,7 +105,11 @@ const PostForm = ({ post, action }: PostFormProps) => {
           )}
         />
         <div className="flex gap-4 items-center justify-end">
-          <Button type="button" className="shad-button_dark_4">
+          <Button
+            type="button"
+            className="shad-button_dark_4"
+            onClick={() => navigate(-1)}
+          >
             Cancel
           </Button>
           <Button
