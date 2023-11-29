@@ -1,16 +1,8 @@
+import { INITIAL_USER } from "@/constants";
 import { getCurrentUser } from "@/lib/appwrite/api";
 import { IContextType, IUser } from "@/types";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const INITIAL_USER = {
-  id: "",
-  name: "",
-  username: "",
-  email: "",
-  imageUrl: "",
-  bio: "",
-};
 
 const INITIAL_STATE = {
   user: INITIAL_USER,

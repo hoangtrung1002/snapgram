@@ -11,7 +11,8 @@ import Profile from "./Profile";
 import UpdateProfile from "./UpdateProfile";
 import PageNotFound from "./PageNotFound";
 import FileUploader from "./FileUploader";
-
+import SearchResults from "./SearchResults";
+import GridPostList from "./GridPostList";
 export {
   TopBar,
   LeftSideBar,
@@ -26,4 +27,6 @@ export {
   UpdateProfile,
   PageNotFound,
   FileUploader,
+  SearchResults,
+  GridPostList,
 };

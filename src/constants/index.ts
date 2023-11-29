@@ -48,3 +48,12 @@ export const bottombarLinks = [
     label: "Create",
   },
 ];
+
+export const INITIAL_USER = {
+  id: "",
+  name: "",
+  username: "",
+  email: "",
+  imageUrl: "",
+  bio: "",
+};
