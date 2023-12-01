@@ -16,6 +16,7 @@ import {
   getRecentPosts,
   getSavedPosts,
   getUserById,
+  getUsers,
   likePost,
   savePost,
   searchPosts,
@@ -76,6 +77,14 @@ export const useSearchPosts = (searchTerm: string) => {
     queryKey: [QUERY_KEYS.SEARCH_POSTS, searchTerm],
     queryFn: () => searchPosts(searchTerm),
     enabled: !!searchTerm,
+  });
+};
+
+export const useGetUsers = (userId: string, limit?: number) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_USERS, userId],
+    queryFn: () => getUsers(userId, limit),
+    enabled: !!userId,
   });
 };
 
