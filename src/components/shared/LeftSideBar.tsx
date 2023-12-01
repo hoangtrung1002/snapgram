@@ -1,5 +1,5 @@
 import { INITIAL_USER, sidebarLinks } from "@/constants";
-import { useUserContext, I } from "@/context/AuthContext";
+import { useUserContext } from "@/context/AuthContext";
 import { useSignOutAccount } from "@/lib/react-query/QueriesAndMutaions";
 import { INavLink } from "@/types";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
@@ -36,7 +36,7 @@ const LeftSideBar = () => {
           <img
             src={user.imageUrl || "/assets/icons/profile-placeholder.svg"}
             alt="profile"
-            className="h-14 w-14 rounded-full"
+            className="h-14 w-14 rounded-full object-cover"
           />
           <div className="flex flex-col">
             <p className="body-bold">{user.name}</p>
