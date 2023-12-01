@@ -1,4 +1,4 @@
-import { INewPost, INewUser, IUpdatePost } from "@/types";
+import { INewPost, INewUser, IUpdatePost, IUpdateUser } from "@/types";
 import { ID, Query } from "appwrite";
 import { account, appwriteConfig, avatars, database, storage } from "./config";
 
@@ -364,6 +364,58 @@ export const getUserById = async (userId: string) => {
     if (!user) throw Error;
 
     return user;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateUser = async (user: IUpdateUser) => {
+  const hasFileChange = user.file.length > 0;
+  try {
+    let image = {
+      imageUrl: user.imageUrl,
+      imageId: user.imageId,
+    };
+    if (hasFileChange) {
+      // upload image to storage
+      const uploadedFile = await uploadFile(user.file[0]);
+      if (!uploadedFile) throw new Error();
+      // Get file url
+      const fileUrl = await getFilePreview(uploadedFile.$id);
+      if (!fileUrl) {
+        deleteFile(uploadedFile.$id);
+        throw new Error();
+      }
+      image = { ...image, imageId: uploadedFile.$id, imageUrl: fileUrl };
+    }
+
+    // Update user
+    const updateUser = await database.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      user.userId,
+      {
+        name: user.name,
+        username: user.username,
+        bio: user.bio,
+        imageUrl: image.imageUrl,
+        imageId: image.imageId,
+      }
+    );
+    // Update Fail
+    if (!updateUser) {
+      // Delete new file that has been recently uploaded
+      if (hasFileChange) {
+        await deleteFile(image.imageId);
+      }
+      // If no new file uploaded, just throw error
+      throw Error();
+    }
+    // Safely delete old file after successful update
+    if (user.imageId && hasFileChange) {
+      await deleteFile(user.imageId);
+    }
+    return updateUser;
   } catch (error) {
     console.log(error);
   }

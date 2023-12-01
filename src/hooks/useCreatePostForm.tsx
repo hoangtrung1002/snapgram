@@ -23,7 +23,6 @@ type Result = {
       location: string;
       tags: string;
     },
-    any,
     undefined
   >;
 };

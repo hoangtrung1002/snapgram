@@ -22,12 +22,14 @@ const PostCard = ({ post }: PostCardProps) => {
                 post.creator.imageUrl || "/assets/icons/profile-placeholder.svg"
               }
               alt="creator"
-              className="rounded-full w-8 lg:h-8"
+              className="rounded-full w-8 lg:h-8 "
             />
           </Link>
           <div className="flex flex-col">
             <div className="flex gap-3 items-baseline">
-              <p className="small-semibold text-light-1">{post.creator.name}</p>
+              <p className="small-semibold text-light-1">
+                {post.creator.username}
+              </p>
               <div className="small-medium gap-2 text-light-3">
                 <p>{multiFormatDateString(post.$createdAt)}</p>
               </div>
