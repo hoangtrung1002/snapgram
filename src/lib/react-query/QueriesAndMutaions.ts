@@ -15,6 +15,7 @@ import {
   getPostById,
   getRecentPosts,
   getSavedPosts,
+  getUserById,
   likePost,
   savePost,
   searchPosts,
@@ -36,6 +37,14 @@ export const useGetCurrentUser = () => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_CURRENT_USER],
     queryFn: getCurrentUser,
+  });
+};
+
+export const useGetUserById = (userId: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_USER_BY_ID, userId],
+    queryFn: () => getUserById(userId),
+    enabled: !!userId,
   });
 };
 
