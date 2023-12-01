@@ -420,3 +420,26 @@ export const updateUser = async (user: IUpdateUser) => {
     console.log(error);
   }
 };
+
+export const getUsers = async (userId: string, limit?: number) => {
+  const queries = [
+    Query.orderDesc("$createdAt"),
+    Query.notEqual("$id", userId),
+  ];
+  if (limit) {
+    queries.push(Query.limit(limit));
+  }
+  try {
+    const users = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      queries
+    );
+
+    if (!users) throw Error();
+
+    return users;
+  } catch (error) {
+    console.log(error);
+  }
+};
