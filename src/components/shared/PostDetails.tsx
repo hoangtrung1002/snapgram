@@ -1,5 +1,8 @@
-import { useGetPostById } from "@/lib/react-query/QueriesAndMutaions";
-import { Link, useParams } from "react-router-dom";
+import {
+  useDeletePost,
+  useGetPostById,
+} from "@/lib/react-query/QueriesAndMutaions";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Loader from "./Loader";
 import { multiFormatDateString } from "@/lib/utils";
 import { useUserContext } from "@/context/AuthContext";
@@ -8,10 +11,15 @@ import PostStats from "./PostStats";
 
 const PostDetails = () => {
   const { id } = useParams();
-  const { data: post, isPending } = useGetPostById(id);
   const { user } = useUserContext();
+  const navigate = useNavigate();
+  const { data: post, isPending } = useGetPostById(id);
+  const { mutateAsync: deletePost } = useDeletePost();
 
-  const handleDelete = () => {};
+  const handleDelete = async () => {
+    await deletePost({ postId: id!, imageId: post?.imageId });
+    navigate(-1);
+  };
   return (
     <div className="post_details-container">
       {isPending || !post ? (
