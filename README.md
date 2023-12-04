@@ -1,35 +1,23 @@
 <!-- Project Title -->
-<p align="center">
-  <img src="[your-logo.png](https://github.com/hoangtrung2000/snapgram/blob/main/public/assets/images/logo.svg)" alt="Snapgram Logo" width="200">
-</p>
 
-<h1 align="center">Snapgram</h1>
+  <p align="center">
+  <img src="https://github.com/hoangtrung2000/snapgram/raw/main/public/assets/images/logo.svg" alt="Snapgram Logo" width="200">
+</p>
 
 <!-- Project Description -->
 <p align="center">
   Snapgram is a social media platform designed for connecting with friends, sharing moments, and exploring the latest updates from your social circle.
 </p>
 
+![Social Media](https://i.ibb.co/yf04Ybz/thumbnail.png)
+
 <!-- Features -->
+
 ## Features
 
-- **Photo Sharing:** Share your favorite moments through photo uploads.
+- **SignIn/SignOut:** Can create an account to visit the the website.
 - **News Feed:** Stay updated with the latest posts from friends and people you follow.
 - **User Profiles:** Customize your profile, add a bio, and showcase your photo gallery.
-- **Likes and Comments:** Interact with posts through likes and comments.
-- **Real-time Notifications:** Get instant notifications for likes and comments on your posts.
+- **Likes and Save:** Interact with posts through likes and save.
+- **Top Creators:** Track all creator are most interesting.
 - **Explore Feed:** Discover new content from users around the world.
-
-<!-- Getting Started -->
-## Getting Started
-
-### Prerequisites
-
-- Node.js: [Download and install Node.js](https://nodejs.org/)
-
-### Installation
-
-1. Clone the Snapgram repository:
-
-   ```bash
-   git clone https://github.com/hoangtrung2000/snapgram.git
