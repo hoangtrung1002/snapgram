@@ -1,6 +1,6 @@
 <!-- Project Title -->
 <p align="center">
-  <img src="your-logo.png" alt="Snapgram Logo" width="200">
+  <img src="[your-logo.png](https://github.com/hoangtrung2000/snapgram/blob/main/public/assets/images/logo.svg)" alt="Snapgram Logo" width="200">
 </p>
 
 <h1 align="center">Snapgram</h1>
