@@ -1,27 +1,42 @@
-# React + TypeScript + Vite
+<!-- Project Title -->
+<p align="center">
+  <img src="your-logo.png" alt="Snapgram Logo" width="200">
+</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h1 align="center">Snapgram</h1>
 
-Currently, two official plugins are available:
+<!-- Project Description -->
+<p align="center">
+  Snapgram is a social media platform designed for connecting with friends, sharing moments, and exploring the latest updates from your social circle.
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<!-- Shields -->
+<p align="center">
+  <img alt="GitHub issues" src="https://img.shields.io/github/issues/hoangtrung2000/snapgram">
+  <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/hoangtrung2000/snapgram">
+  <img alt="GitHub license" src="https://img.shields.io/github/license/hoangtrung2000/snapgram">
+</p>
 
-## Expanding the ESLint configuration
+<!-- Features -->
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Photo Sharing:** Share your favorite moments through photo uploads.
+- **News Feed:** Stay updated with the latest posts from friends and people you follow.
+- **User Profiles:** Customize your profile, add a bio, and showcase your photo gallery.
+- **Likes and Comments:** Interact with posts through likes and comments.
+- **Real-time Notifications:** Get instant notifications for likes and comments on your posts.
+- **Explore Feed:** Discover new content from users around the world.
 
-- Configure the top-level `parserOptions` property like this:
+<!-- Getting Started -->
+## Getting Started
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+### Prerequisites
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Node.js: [Download and install Node.js](https://nodejs.org/)
+
+### Installation
+
+1. Clone the Snapgram repository:
+
+   ```bash
+   git clone https://github.com/hoangtrung2000/snapgram.git
