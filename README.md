@@ -10,13 +10,6 @@
   Snapgram is a social media platform designed for connecting with friends, sharing moments, and exploring the latest updates from your social circle.
 </p>
 
-<!-- Shields -->
-<p align="center">
-  <img alt="GitHub issues" src="https://img.shields.io/github/issues/hoangtrung2000/snapgram">
-  <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/hoangtrung2000/snapgram">
-  <img alt="GitHub license" src="https://img.shields.io/github/license/hoangtrung2000/snapgram">
-</p>
-
 <!-- Features -->
 ## Features
 
