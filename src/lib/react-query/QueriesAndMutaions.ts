@@ -80,11 +80,10 @@ export const useSearchPosts = (searchTerm: string) => {
   });
 };
 
-export const useGetUsers = (userId: string, limit?: number) => {
+export const useGetUsers = (limit?: number) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.GET_USERS, userId],
-    queryFn: () => getUsers(userId, limit),
-    enabled: !!userId,
+    queryKey: [QUERY_KEYS.GET_USERS],
+    queryFn: () => getUsers(limit),
   });
 };
 

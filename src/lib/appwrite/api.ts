@@ -314,7 +314,7 @@ export const getInfinitePosts = async ({
 }: {
   pageParam: number;
 }) => {
-  const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(10)];
+  const queries = [Query.orderDesc("$updatedAt"), Query.limit(10)];
 
   if (pageParam) {
     queries.push(Query.cursorAfter(pageParam.toString())); //offset
@@ -421,14 +421,16 @@ export const updateUser = async (user: IUpdateUser) => {
   }
 };
 
-export const getUsers = async (userId: string, limit?: number) => {
-  const queries = [
-    Query.orderDesc("$createdAt"),
-    Query.notEqual("$id", userId),
-  ];
+export const getUsers = async (limit?: number) => {
+  const queries = [Query.orderDesc("$createdAt")];
   if (limit) {
     queries.push(Query.limit(limit));
   }
+
+  // if (userId) {
+  //   queries.push(Query.notEqual("$id", userId));
+  // }
+
   try {
     const users = await database.listDocuments(
       appwriteConfig.databaseId,

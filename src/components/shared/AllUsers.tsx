@@ -1,17 +1,11 @@
-import { useUserContext } from "@/context/AuthContext";
 import { useGetUsers } from "@/lib/react-query/QueriesAndMutaions";
 import { UserCard } from ".";
 import { useToast } from "../ui/use-toast";
 import Loader from "./Loader";
 
 const AllUsers = () => {
-  const { user } = useUserContext();
   const { toast } = useToast();
-  const {
-    data: creators,
-    isLoading,
-    isError: isErrorCreators,
-  } = useGetUsers(user?.id || "");
+  const { data: creators, isLoading, isError: isErrorCreators } = useGetUsers();
 
   if (isErrorCreators) {
     toast({
