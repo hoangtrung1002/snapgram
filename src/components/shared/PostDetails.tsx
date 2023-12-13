@@ -13,7 +13,7 @@ const PostDetails = () => {
   const { id } = useParams();
   const { user } = useUserContext();
   const navigate = useNavigate();
-  const { data: post, isPending } = useGetPostById(id);
+  const { data: post, isLoading } = useGetPostById(id);
   const { mutateAsync: deletePost } = useDeletePost();
 
   const handleDelete = async () => {
@@ -22,7 +22,7 @@ const PostDetails = () => {
   };
   return (
     <div className="post_details-container">
-      {isPending || !post ? (
+      {isLoading || !post ? (
         <Loader />
       ) : (
         <div className="post_details-card">

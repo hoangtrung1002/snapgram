@@ -31,9 +31,9 @@ const useCreatePostForm = (
   post?: Models.Document,
   action?: TypeAction
 ): Result => {
-  const { mutateAsync: updatePost, isPending: isLoadingUpdate } =
+  const { mutateAsync: updatePost, isLoading: isLoadingUpdate } =
     useUpdatePost();
-  const { mutateAsync: createPost, isPending: isLoadingCreate } =
+  const { mutateAsync: createPost, isLoading: isLoadingCreate } =
     useCreatePost();
   const { user } = useUserContext();
   const { toast } = useToast();

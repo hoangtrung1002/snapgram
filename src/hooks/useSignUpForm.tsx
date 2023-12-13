@@ -12,7 +12,7 @@ import * as z from "zod";
 
 const useSignUpForm = () => {
   const { toast } = useToast();
-  const { mutateAsync: createUserAccount, isPending: isCreatingAccount } =
+  const { mutateAsync: createUserAccount, isLoading: isCreatingAccount } =
     useCreateUserAccount();
   const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
   const { mutateAsync: signInAccount } = useSignInAccount();

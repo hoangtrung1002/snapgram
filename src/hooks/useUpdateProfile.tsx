@@ -24,7 +24,7 @@ const useUpdateProfile = (currentUser: Models.Document) => {
       bio: user.bio || "",
     },
   });
-  const { mutateAsync: updateUser, isPending: isLoadingUpdate } =
+  const { mutateAsync: updateUser, isLoading: isLoadingUpdate } =
     useUpdateUser();
 
   const handleUpdate = async (value: z.infer<typeof ProfileValidation>) => {

@@ -10,13 +10,13 @@ import { Models } from "appwrite";
 const Home = () => {
   const {
     data: posts,
-    isPending: isPostLoading,
+    isLoading: isPostLoading,
     isError: isPostError,
   } = useGetRecentPosts();
 
   const {
     data: creators,
-    isPending: isUserLoading,
+    isLoading: isUserLoading,
     isError: isErrorCreators,
   } = useGetUsers(5);
 
